@@ -7,6 +7,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { sendMessageToGemini } from '../gemini.js';
 import { saveChatMessage, loadChatHistory } from '../firebase.js';
+import { logChatInteraction } from '../analytics.js';
 
 // Unique session ID for this browser tab
 const SESSION_ID = `session_${Date.now()}`;
@@ -105,6 +106,9 @@ export default function ChatSection({ lang }) {
     setInput('');
     setIsLoading(true);
     setStreamBuffer('');
+
+    // Track chat interaction via GA4 + Firebase Analytics
+    logChatInteraction(lang);
 
     // Persist user message to Firebase
     await saveChatMessage(SESSION_ID, 'user', userText);

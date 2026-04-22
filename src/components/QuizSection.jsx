@@ -6,6 +6,7 @@
  */
 import React, { useState, useCallback } from 'react';
 import { quizQuestionsEnglish, quizQuestionsHindi } from '../quizData.js';
+import { logQuizCompletion } from '../analytics.js';
 
 // Quiz states
 const STATE = { READY: 'ready', PLAYING: 'playing', ANSWERED: 'answered', DONE: 'done' };
@@ -51,6 +52,8 @@ export default function QuizSection({ lang }) {
   const handleNext = () => {
     if (currentIdx + 1 >= totalQ) {
       setQuizState(STATE.DONE);
+      // Log quiz completion to GA4 + Firebase Analytics
+      logQuizCompletion(score, totalQ, lang);
     } else {
       setCurrentIdx(i => i + 1);
       setSelectedOption(null);
