@@ -1,0 +1,251 @@
+/* ============================================================
+   ElectionAI – Global Styles & Design System
+   Using Tailwind CSS v4 with custom design tokens
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ── Custom CSS Variables (Design Tokens) ─────────────────── */
+@layer base {
+  :root {
+    /* Blue palette */
+    --color-primary-50:  #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+
+    /* Dark mode base */
+    --color-bg:        #0f172a;
+    --color-surface:   #1e293b;
+    --color-surface-2: #2d3748;
+    --color-border:    rgba(255,255,255,0.08);
+    --color-text:      #f1f5f9;
+    --color-muted:     #94a3b8;
+
+    /* Accent */
+    --color-accent-orange: #f97316;
+    --color-accent-green:  #22c55e;
+    --color-accent-purple: #a78bfa;
+
+    /* Glow */
+    --glow-blue: 0 0 30px rgba(59,130,246,0.25);
+    --glow-sm:   0 0 15px rgba(59,130,246,0.15);
+
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+  }
+}
+
+/* ── Utility Classes ──────────────────────────────────────── */
+@layer utilities {
+  /* Glassmorphism card */
+  .glass {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Blue gradient button */
+  .btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(37,99,235,0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37,99,235,0.50);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Scrollbar styling */
+  .custom-scroll::-webkit-scrollbar { width: 4px; }
+  .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+  }
+  .custom-scroll::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+  /* Message bubbles */
+  .message-user {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border-radius: 18px 18px 4px 18px;
+    padding: 12px 16px;
+    max-width: 75%;
+    align-self: flex-end;
+    word-break: break-word;
+    line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+  }
+
+  .message-ai {
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #f1f5f9;
+    border-radius: 18px 18px 18px 4px;
+    padding: 12px 16px;
+    max-width: 80%;
+    align-self: flex-start;
+    word-break: break-word;
+    line-height: 1.6;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* Animated pulse ring */
+  .pulse-ring {
+    animation: pulseRing 2s infinite;
+  }
+
+  /* Typing dots animation */
+  .typing-dot {
+    animation: typingBounce 1.4s infinite ease-in-out;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  /* Tab underline */
+  .tab-active {
+    color: #60a5fa;
+    border-bottom: 2px solid #3b82f6;
+  }
+}
+
+/* ── Keyframe Animations ──────────────────────────────────── */
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(59,130,246,0); }
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-6px); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.35s ease forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* Shimmer loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #2d3748 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ── Timeline specific ────────────────────────────────────── */
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 44px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #3b82f6, transparent);
+}
+
+/* ── Quiz specific ────────────────────────────────────────── */
+.quiz-option {
+  background: rgba(30,41,59,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+  color: #f1f5f9;
+  font-size: 0.95rem;
+}
+.quiz-option:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background: rgba(59,130,246,0.12);
+  transform: translateX(4px);
+}
+.quiz-option.correct {
+  border-color: #22c55e;
+  background: rgba(34,197,94,0.15);
+  color: #86efac;
+}
+.quiz-option.wrong {
+  border-color: #ef4444;
+  background: rgba(239,68,68,0.12);
+  color: #fca5a5;
+}
+.quiz-option.reveal-correct {
+  border-color: #22c55e;
+  background: rgba(34,197,94,0.1);
+}
+
+/* ── Markdown-like rendered text ─────────────────────────── */
+.ai-text strong { color: #93c5fd; font-weight: 600; }
+.ai-text em    { color: #c4b5fd; font-style: italic; }
+.ai-text ul    { margin: 8px 0 8px 16px; }
+.ai-text ol    { margin: 8px 0 8px 16px; }
+.ai-text li    { margin: 4px 0; }
+.ai-text p     { margin: 6px 0; }
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .message-user { max-width: 90%; }
+  .message-ai   { max-width: 92%; }
+}
